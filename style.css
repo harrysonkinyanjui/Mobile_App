@@ -1,19 +1,23 @@
-
 :root {
-  --background: #101827;
-  --card: #1b2638;
-  --input: #111c2e;
-  --primary: #6c63ff;
-  --primary-hover: #574df0;
+  --background: #0b1020;
+  --card: rgba(25, 35, 59, 0.88);
+  --input: #101a30;
+  --primary: #7067ff;
+  --primary-hover: #8a83ff;
   --text: #f3f5ff;
   --muted: #9ba8bc;
-  --border: #344258;
+  --border: #354363;
   --success: #58e0b0;
   --danger: #ff8585;
+  --glow: rgba(112, 103, 255, 0.22);
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -21,10 +25,13 @@ body {
   min-height: 100vh;
   padding: 28px 16px;
   background:
-    radial-gradient(ellipse at top, #25345a 0%, transparent 55%),
+    radial-gradient(ellipse at 50% -10%, #343d78 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 80%, #15394a 0%, transparent 40%),
     var(--background);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 button,
@@ -33,10 +40,15 @@ select {
   font: inherit;
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .app {
   width: 100%;
   max-width: 620px;
   margin: 0 auto;
+  animation: app-enter 0.7s ease both;
 }
 
 .header {
@@ -49,40 +61,60 @@ select {
 .logo {
   display: grid;
   place-items: center;
+  flex-shrink: 0;
   width: 56px;
   height: 56px;
-  border-radius: 16px;
-  background: var(--primary);
+  border: 1px solid #ffffff24;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #8178ff, #5146d9 60%, #287da7);
+  box-shadow: 0 8px 28px var(--glow);
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -2px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo:hover {
+  transform: rotate(-5deg) scale(1.06);
+  box-shadow: 0 12px 34px var(--glow);
 }
 
 h1 {
   margin: 0;
   font-size: clamp(23px, 5vw, 31px);
+  line-height: 1.2;
+  letter-spacing: -0.8px;
 }
 
 .subtitle {
   margin: 7px 0 0;
   color: var(--muted);
   font-size: 14px;
+  line-height: 1.5;
 }
 
 .card {
   padding: 26px;
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  box-shadow: 0 18px 50px #0003;
+  border: 1px solid #64739a40;
+  border-radius: 24px;
+  box-shadow: 0 22px 65px #0005;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  border-color: #7770ff70;
+  box-shadow: 0 25px 70px #0006, 0 0 30px #7067ff0b;
 }
 
 label {
   display: block;
   margin-bottom: 9px;
-  color: #dce3f3;
+  color: #e1e7f8;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 650;
 }
 
 input,
@@ -93,14 +125,29 @@ select {
   color: var(--text);
   background: var(--input);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 12px;
   outline: none;
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
+}
+
+input::placeholder {
+  color: #7f8da6;
+}
+
+input:hover,
+select:hover {
+  border-color: #64739a;
 }
 
 input:focus,
 select:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px #6c63ff30;
+  background: #131e36;
+  box-shadow: 0 0 0 4px var(--glow);
 }
 
 input {
@@ -119,37 +166,64 @@ input {
 }
 
 .swap {
+  display: grid;
+  place-items: center;
   width: 42px;
   height: 44px;
   margin-bottom: 0;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--input);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #1b2942, #111a2d);
   color: var(--success);
   cursor: pointer;
   font-size: 25px;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
 
 .swap:hover {
+  transform: rotate(180deg);
   border-color: var(--success);
+  background: #193a3a;
+}
+
+.swap:active {
+  transform: scale(0.92);
 }
 
 .convert {
   width: 100%;
   margin-top: 24px;
   padding: 15px;
-  border: none;
-  border-radius: 11px;
+  border: 1px solid #ffffff20;
+  border-radius: 13px;
   color: white;
-  background: var(--primary);
-  font-weight: 700;
+  background: linear-gradient(110deg, #6258ed, #8175ff 55%, #536de9);
+  background-size: 180% 100%;
+  box-shadow: 0 8px 24px #7067ff2b;
+  font-weight: 750;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  transition:
+    background-position 0.35s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
 }
 
 .convert:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
+  background-position: 100% 0;
+  box-shadow: 0 12px 30px #7067ff45;
+  transform: translateY(-2px);
+}
+
+.convert:active {
+  transform: translateY(0) scale(0.985);
+}
+
+button:focus-visible {
+  outline: 3px solid #a8a2ff;
+  outline-offset: 3px;
 }
 
 .error {
@@ -162,14 +236,21 @@ input {
 
 .error:not(:empty) {
   margin-top: 14px;
+  animation: result-enter 0.25s ease both;
 }
 
 .result-box {
   margin-top: 20px;
   padding: 18px;
-  border: 1px solid #3c4a62;
-  border-radius: 14px;
-  background: #111c2e;
+  border: 1px solid #3c4a627a;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #111c2e, #131d32);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.result-box:hover {
+  border-color: #58e0b065;
+  transform: translateY(-2px);
 }
 
 .result-heading {
@@ -182,12 +263,14 @@ input {
 }
 
 .base-tag {
-  padding: 5px 8px;
-  border-radius: 6px;
+  padding: 5px 9px;
+  border: 1px solid #58e0b025;
+  border-radius: 7px;
   color: var(--success);
-  background: #58e0b015;
+  background: #58e0b012;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 750;
+  letter-spacing: 0.4px;
 }
 
 .result {
@@ -195,7 +278,7 @@ input {
   overflow-wrap: anywhere;
   color: var(--success);
   font-size: clamp(20px, 4vw, 27px);
-  font-weight: 700;
+  font-weight: 750;
   line-height: 1.5;
 }
 
@@ -204,8 +287,22 @@ input {
   color: var(--text);
   background: #29364b;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 9px;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.copy:hover:not(:disabled) {
+  background: #364661;
+  border-color: #7585a5;
+  transform: translateY(-1px);
+}
+
+.copy:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .copy:disabled {
@@ -215,11 +312,13 @@ input {
 
 .examples {
   margin-top: 28px;
+  animation: app-enter 0.8s 0.1s ease both;
 }
 
 .examples h2 {
   margin-bottom: 15px;
   font-size: 17px;
+  letter-spacing: -0.2px;
 }
 
 .base-list {
@@ -232,10 +331,20 @@ input {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 13px;
+  padding: 14px;
   border: 1px solid var(--border);
-  border-radius: 11px;
+  border-radius: 13px;
   background: #1b2638a8;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.base-list div:hover {
+  transform: translateY(-3px);
+  border-color: #7067ff80;
+  background: #222f49;
 }
 
 .base-list strong {
@@ -250,9 +359,44 @@ input {
 
 footer {
   margin-top: 30px;
+  padding-bottom: 10px;
   color: var(--muted);
   text-align: center;
   font-size: 12px;
+  line-height: 1.6;
+}
+
+@keyframes app-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes result-enter {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (max-width: 420px) {
@@ -260,8 +404,21 @@ footer {
     padding: 18px 12px;
   }
 
+  .header {
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    font-size: 21px;
+  }
+
   .card {
     padding: 18px 14px;
+    border-radius: 20px;
   }
 
   .base-controls {
@@ -271,6 +428,7 @@ footer {
 
   .swap {
     width: 34px;
+    font-size: 21px;
   }
 
   .field select {
