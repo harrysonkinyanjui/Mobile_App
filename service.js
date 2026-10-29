@@ -1,12 +1,13 @@
+const CACHE_NAME = "number-converter-v3";
 
-const CACHE_NAME = "number-converter-v2";
-
-const APP_FILES = [
+const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./style.css",
   "./script.js",
-  "./manifest.json"
+  "./manifest.json",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png"
 ];
 
 // Install the service worker and cache the website files.
