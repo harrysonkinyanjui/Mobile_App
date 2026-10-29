@@ -2,11 +2,10 @@
 {
   "name": "Number System Converter",
   "short_name": "Number Converter",
-  "description": "Convert binary, octal, decimal and hexadecimal numbers.",
+  "description": "Convert numbers between binary, octal, decimal and hexadecimal.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#101827",
   "theme_color": "#101827",
   "icons": [
