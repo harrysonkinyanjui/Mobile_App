@@ -1,4 +1,4 @@
-const CACHE_NAME = "number-converter-v3";
+const CACHE_NAME = "number-converter-v4";
 
 const FILES_TO_CACHE = [
   "./",
